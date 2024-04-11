@@ -3,9 +3,9 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../custom Hooks/useAuth"
 import {toast} from "react-toastify"
+import { config } from "../config"
 
 export function Signin(){
-    const url = "https://blogbackend-0qmc.onrender.com"
     const navigate = useNavigate()
     useAuth("/","/signin")
     const [formData,setformData] = useState({
@@ -22,7 +22,7 @@ export function Signin(){
     function clickHandler(){
         axios({
             method : "post",
-            url : `${url}/user/signin`,
+            url : `${config.url}/user/signin`,
             data : formData
         }).then((res)=>{
             localStorage.setItem("token","Bearer " + res.data.token)

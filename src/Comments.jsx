@@ -1,15 +1,15 @@
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
+import { config } from "./config";
 export function Comment({comt,id,setCommentsArray,showDeleteBtn}){
     const url = "https://blogbackend-0qmc.onrender.com"
     function clickHandler(cmtID){
         axios({
             method : "delete",
-            url : `${url}/post/deleteComment/${id}/${cmtID}`
+            url : `${config.url}/post/deleteComment/${id}/${cmtID}`
         })
         .then((res)=>{
             setCommentsArray(res.data.msg.Comments)
-            console.log(res.data)
         })
     }
     return(

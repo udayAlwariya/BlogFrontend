@@ -4,14 +4,14 @@ import { Link } from "react-router-dom"
 import { Loader } from "../Loader/Loader"
 import { useRecoilState } from "recoil"
 import { postAtom } from "../atom"
+import { config } from "../config"
 
 export function Home(){
-    const url = "https://blogbackend-0qmc.onrender.com"
     const [posts,setPosts] = useRecoilState(postAtom)
     useEffect(()=>{
         axios({
             method : "get",
-            url : `${url}/post/allPosts`
+            url : `${config.url}/post/allPosts`
         }).then((res)=>{
             setPosts(res.data.allPosts)
         }).catch(()=>{
@@ -33,11 +33,10 @@ export function Home(){
 }
 
 function Posts({post}){
-    const url = "https://blogbackend-0qmc.onrender.com"
     return(
         <>
             <div className="flex-row mt-10 w-9/12 md:flex mx-auto">
-            <img src={`${url}/images/${post.image}`} className="md:w-4/12  w-full"  alt="" />
+            <img src={`${config.url}/images/${post.image}`} className="md:w-4/12  w-full"  alt="" />
             <div className="ml-2">
                 <h1 className="font-bold text-xl">{post.title}</h1>
                 <div className="flex justify-between text-gray-400 text-sm">

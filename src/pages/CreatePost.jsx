@@ -4,6 +4,7 @@ import { ImCross } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../custom Hooks/useAuth";
 import {toast} from "react-toastify"
+import { config } from "../config";
 
 export function CreatePost(){
     useAuth("/create","/register")
@@ -11,7 +12,6 @@ export function CreatePost(){
     const[cats,setCats] = useState([])
     const[img,setImage] = useState("")
     const navigate = useNavigate()
-    const url = "https://blogbackend-0qmc.onrender.com"
     useEffect(() => {
         setFormData(prev => ({
             ...prev,
@@ -63,7 +63,7 @@ export function CreatePost(){
         sendData.append("category",formData.category)
         axios({
             method:"post",
-            url : `${url}/post/create`,
+            url : `${config.url}/post/create`,
             headers : {
                 "Authorization" : localStorage.getItem("token"),
                 

@@ -4,9 +4,9 @@ import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../custom Hooks/useAuth"
 import {toast} from "react-toastify"
+import { config } from "../config"
 
 export function HomeProfile(){
-    const url = "https://blogbackend-0qmc.onrender.com"
     useAuth("/profile","/register")
     const [userPosts,setUserPosts] = useState([])
     const navigate = useNavigate() 
@@ -20,7 +20,7 @@ export function HomeProfile(){
     useEffect(()=>{
         axios({
             method : "get",
-            url : `${url}/post/profilePosts`,
+            url : `${config.url}/post/profilePosts`,
             headers : {
                 Authorization : localStorage.getItem("token")
             },
@@ -35,7 +35,7 @@ export function HomeProfile(){
     function clickHandler(){
         axios({
             method : "post",
-            url : `${url}/user/update`,
+            url : `${config.url}/user/update`,
             headers : {
                 Authorization : localStorage.getItem("token")
             },

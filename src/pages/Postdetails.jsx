@@ -2,6 +2,7 @@ import { Comment } from "../Comments";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { config } from "../config";
 
 export function Postdetails({CommentsArray,setCommentsArray}){
     const[details,setDetails] = useState({})
@@ -10,11 +11,10 @@ export function Postdetails({CommentsArray,setCommentsArray}){
         comment : ""
     })
     const {id} = useParams()
-    const url = "https://blogbackend-0qmc.onrender.com"
     useEffect(()=>{
         axios({
             method : "get",
-            url : `${url}/auth`,
+            url : `${config.url}/auth`,
             headers : {
                 Authorization : localStorage.getItem("token")
             }
@@ -31,7 +31,7 @@ export function Postdetails({CommentsArray,setCommentsArray}){
     useEffect(()=>{
         axios({
             method : "get",
-            url : `${url}/post/getPost/`+ id,
+            url : `${config.url}/post/getPost/`+ id,
            
         })
         .then((res)=>{
@@ -48,7 +48,7 @@ export function Postdetails({CommentsArray,setCommentsArray}){
         } else{
             axios({
                 method : "post",
-                url : `${url}/post/comment/`+ id,
+                url : `${config.url}/post/comment/`+ id,
                 headers : {
                     Authorization : localStorage.getItem("token")
                 },
@@ -66,7 +66,7 @@ export function Postdetails({CommentsArray,setCommentsArray}){
     useEffect(()=>{
         axios({
             method : "get",
-            url : `${url}/post/getComments/`+ id,
+            url : `${config.url}/post/getComments/`+ id,
         }).then((res)=>{
             setCommentsArray(res.data.post[0].Comments)
             
@@ -93,7 +93,7 @@ export function Postdetails({CommentsArray,setCommentsArray}){
                 
             </div>
             <div>
-                <img src={`${url}/images/${details.image}`} className="w-full mb-7" alt="" />
+                <img src={`${config.url}/images/${details.image}`} className="w-full mb-7" alt="" />
             </div>
             <p className="mb-10">
                 {details.description}

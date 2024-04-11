@@ -6,6 +6,7 @@ import {useRecoilState,useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { SlClose } from "react-icons/sl";
+import { config } from "./config";
 
 export function NavBar(){
     const navigate = useNavigate()
@@ -14,7 +15,6 @@ export function NavBar(){
     const [search,setSearch] = useState("")
     const setPosts = useSetRecoilState(postAtom)
     const [toggle,setToggle] = useState(false)
-    const url = "https://blogbackend-0qmc.onrender.com"
 
 
     function logoutHandler(){
@@ -26,7 +26,7 @@ export function NavBar(){
     useEffect(()=>{
             axios({
                 method : "get",
-                url : `${url}/auth`,
+                url : `${config.url}/auth`,
                 headers : {
                     Authorization : localStorage.getItem("token")
                 }
@@ -40,7 +40,7 @@ export function NavBar(){
     },[location.pathname])
 
     useEffect(()=>{
-        axios.get(`${url}/post/searchPost?filter=`+search)
+        axios.get(`${config.url}/post/searchPost?filter=`+search)
         .then((res)=>{
             setPosts(res.data.filteredPosts)
         })

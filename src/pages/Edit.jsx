@@ -4,15 +4,13 @@ import { ImCross } from "react-icons/im";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../custom Hooks/useAuth";
 import {toast} from "react-toastify"
+import { config } from "../config";
 
 export function EditPost(){
     const[formData,setFormData] = useState({
         title : "",
         description : ""
     })
-
-    console.log(formData)
-
     const {id} = useParams()
     const navigate = useNavigate()
     const[cat,setCat] = useState("")
@@ -66,10 +64,10 @@ export function EditPost(){
         sendData.append("category",formData.category)
        axios({
         method : "put",
-        url : `http://localhost:3000/post/updatePost/${id}`,
+        url : `${config.url}/post/updatePost/${id}`,
         data : sendData
        })
-       .then((res)=>{
+       .then(()=>{
         toast.success('Blog Updated!', {
             position: "top-center",
             autoClose: 1000,
@@ -80,9 +78,7 @@ export function EditPost(){
             progress: undefined,
             theme: "light",
             })
-        console.log(res.data)
         navigate("/profile")
-
        })
     }
     return(
