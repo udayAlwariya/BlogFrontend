@@ -42,8 +42,8 @@ export function Signup(){
                 })
             navigate("/")
         })
-        .catch(()=>{
-            toast.error('Inputs Invalid', {
+        .catch((e)=>{
+            toast.error(e.response.data.message, {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,

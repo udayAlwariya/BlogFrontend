@@ -38,7 +38,7 @@ export function Signin(){
                 })
             navigate('/')
         }).catch((e)=>{
-            toast.error('Credentials Invalid', {
+            toast.error(e.response.data.message, {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
